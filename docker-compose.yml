@@ -2,5 +2,8 @@ phoenix:
     build: .
     volumes:
         - .:/app
-    command: mix phoenix.new /app/
+        - .mix:/root/.mix
+    command: /bin/sh -c "npm install && mix deps.get && mix phoenix.server"
+    ports:
+      - 4000:4000
             
