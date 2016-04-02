@@ -1,0 +1,6 @@
+phoenix:
+    build: .
+    volumes:
+        - .:/app
+    command: mix phoenix.new /app/
+            
