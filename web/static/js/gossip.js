@@ -13,27 +13,27 @@ class Gossip {
         var chan = socket.channel("rooms:lobby", {})
         chan.join()
             .receive("ignore", () => console.log("auth error"))
-    .receive("ok", () => console.log("join ok"))
-    .receive("timeout", () => console.log("Connection interruption"))
-        chan.onError(e => console.log("something went wrong", e))
-        chan.onClose(e => console.log("channel closed", e))
+            .receive("ok", () => console.log("join ok"))
+            .receive("timeout", () => console.log("Connection interruption"))
+                chan.onError(e => console.log("something went wrong", e))
+                chan.onClose(e => console.log("channel closed", e))
 
         $input.off("keypress").on("keypress", e => {
             if (e.keyCode == 13) {
-            chan.push("new:msg", {user: $username.val(), body: $input.val()}, 10000)
-            $input.val("")
-        }
-    })
+                chan.push("new:msg", {user: $username.val(), body: $input.val()}, 10000)
+                $input.val("")
+            }
+        })
 
         chan.on("new:msg", msg => {
             $messages.append(this.messageTemplate(msg))
-        scrollTo(0, document.body.scrollHeight)
-    })
+            scrollTo(0, document.body.scrollHeight)
+        })
 
         chan.on("user:entered", msg => {
             var username = this.sanitize(msg.user || "anonymous")
             $messages.append(`<br/><i>[${username} entered]</i>`)
-    })
+        })
     }
 
     static sanitize(html){ return $("<div/>").text(html).html() }
