@@ -3,7 +3,7 @@ phoenix:
     volumes:
         - .:/app
         - .mix:/root/.mix
-    command: /bin/sh -c "npm install && mix deps.get && mix phoenix.server"
+    command: /bin/sh -c "npm install && mix local.hex --force && mix local.rebar && mix deps.get && mix hex.info && mix phoenix.server"
     ports:
       - 4000:4000
-            
+
