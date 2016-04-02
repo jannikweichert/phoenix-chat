@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM phusion/passenger-customizable:0.9.18
 
 MAINTAINER Marcelo Gonçalves <marcelocg@gmail.com>
 
